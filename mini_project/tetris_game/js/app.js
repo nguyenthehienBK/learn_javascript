@@ -1,19 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
     const allBtn = document.querySelectorAll('button')
     // const startBtn = document.querySelector('button')
-    const grid = document.querySelector('.grid')
+    // const grid = document.querySelector('.grid')
+    
     const scoreDisplay = document.querySelector('.score-display')
     const lineDisplay = document.querySelector('.lines-display')
     const displaySquares = document.querySelectorAll('.previous-grid div')
-    let squares = Array.from(grid.querySelectorAll('div'))   
     const width = 10
     const height = 20
+    const GRID_SIZE = width * height
+    // console.log(GRID_SIZE)
+    const grid = createGrid();
+    let squares = Array.from(grid.querySelectorAll('div'))   
+    
+
     let currentPosition = 4
     let timerId 
     let score = 0
     let lines = 0
     let currentIndex = 0
 
+    
+
+  function createGrid() {
+    // the main grid
+    let grid = document.querySelector(".grid")
+    for (let i = 0; i < GRID_SIZE; i++) {
+      let gridElement = document.createElement("div")
+      grid.appendChild(gridElement)
+    }
+
+    // set base of grid
+    for (let i = 0; i < width; i++) {
+      let gridElement = document.createElement("div")
+      gridElement.setAttribute("class", "block3")
+      grid.appendChild(gridElement)
+    }
+
+    // let previousGrid = document.querySelector(".previous-grid")
+    // // Since 16 is the max grid size in which all the Tetrominoes 
+    // // can fit in we create one here
+    // for (let i = 0; i < 16; i++) {
+    //   let gridElement = document.createElement("div")
+    //   previousGrid.appendChild(gridElement);
+    // }
+    return grid;
+  }
     // assign functions to keycodes
     function control(event) {
         if (event.keyCode === 39) {
